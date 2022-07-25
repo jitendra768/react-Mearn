@@ -1,11 +1,32 @@
-import React from "react";
-import "./style.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginReg from "./components/pages/auth/LoginReg";
+import ResetPassword from "./components/pages/auth/ResetPassword";
+import SendPasswordResetEmail from "./components/pages/auth/SendPasswordResetEmail";
+import Contact from "./components/pages/Contact";
+import Dashboard from "./components/pages/Dashboard";
+import Home from "./components/pages/Home";
+import Layout from "./components/pages/Layout";
 
-export default function App() {
+function App() {
   return (
-    <div>
-      <h1>Hello StackBlitz!</h1>
-      <p>Start editing to see some magic happen :)</p>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="login" element={<LoginReg />} />
+            <Route path="sendpasswordresetemail" element={<SendPasswordResetEmail />} />
+            {/* <Route path="reset" element={<ResetPassword />} /> */}
+            <Route path="api/user/reset/:id/:token" element={<ResetPassword />} />
+
+          </Route>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="*" element={<h1>Error 404 Page not found !!</h1>} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
+
+export default App;
